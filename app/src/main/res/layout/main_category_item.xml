@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        app:cardBackgroundColor="@color/colorYellow"
+        android:layout_margin="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_10sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+         <ImageView
+            android:id="@+id/imageDish"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+             android:layout_marginEnd="-20dp"
+             android:layout_marginTop="-20dp"
+             android:contentDescription="@string/app_name"
+             android:layout_alignParentEnd="true"
+            android:src="@drawable/post_1"/>
+
+            <TextView
+                android:id="@+id/textDishName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dish"
+                android:textSize="@dimen/_10ssp"
+                android:maxEms="10"
+                android:maxLines="2"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/ubuntu_bold"
+                android:padding="@dimen/_10sdp"/>
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

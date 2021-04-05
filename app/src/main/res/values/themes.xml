@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ThemeOverlay.Search" parent="Theme.FoodRecipeApp">
+        <!-- Primary brand color. -->
+        <item name="android:editTextColor">@color/colorBlack</item>
+        <item name="android:textColorHint">#353535</item>
+    </style>
 </resources>
