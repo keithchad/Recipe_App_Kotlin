@@ -17,14 +17,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/cooking" />
+        app:lottie_fileName="cooking.json" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu_bold"
-        android:text="FOOD RECIPE"
+        android:text="@string/food_recipe"
         android:textSize="20sp"
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +34,7 @@
         android:layout_marginTop="20dp"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonGetStarted"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"

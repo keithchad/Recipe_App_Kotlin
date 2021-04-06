@@ -44,6 +44,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     def room_version = "2.2.6"
+    def retrofit_version = "2.9.0"
     def lottie_version = "3.7.0"
 
     //Constraint Layout
@@ -66,6 +67,10 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
+    //Retrofit
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+
     //Rounded ImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
@@ -80,7 +85,5 @@ dependencies {
 
     //Lottie Animation
     implementation "com.airbnb.android:lottie:$lottie_version"
-
-
 
 }

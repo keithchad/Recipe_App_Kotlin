@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -13,7 +14,7 @@
         app:cardElevation="@dimen/_5sdp">
 
         <ImageView
-            android:id="@+id/imageDish"
+            android:id="@+id/imageDishSub"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/app_name"
@@ -28,7 +29,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textDishName"
+            android:id="@+id/textDishNameSub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/dish"
@@ -36,7 +37,8 @@
             android:maxLines="2"
             android:textColor="@color/colorBlack"
             android:fontFamily="@font/ubuntu_medium"
-            android:paddingStart="@dimen/_10sdp"/>
+            android:paddingStart="@dimen/_10sdp"
+            tools:ignore="RtlSymmetry" />
 
     </LinearLayout>
 
