@@ -5,12 +5,16 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.foodrecipeapp.adapter.MainCategoryAdapter
 import com.chad.foodrecipeapp.adapter.SubCategoryAdapter
+import com.chad.foodrecipeapp.database.RecipeDatabase
+import com.chad.foodrecipeapp.model.Category
+import com.chad.foodrecipeapp.model.CategoryItems
 import com.chad.foodrecipeapp.model.Recipe
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.coroutines.launch
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
-    var mainCategoryList = ArrayList<Recipe>()
+    var mainCategoryList = ArrayList<CategoryItems>()
     var subCategoryList = ArrayList<Recipe>()
 
     var mainCategoryAdapter = MainCategoryAdapter()
@@ -24,26 +28,41 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setDummyData() {
-        mainCategoryList.add(Recipe(0, "Beef"))
-        mainCategoryList.add(Recipe(1, "Meat"))
-        mainCategoryList.add(Recipe(2, "Pork"))
-        mainCategoryList.add(Recipe(3, "Dessert"))
-
+//        mainCategoryList.add(Recipe(0, "Beef"))
+//        mainCategoryList.add(Recipe(1, "Meat"))
+//        mainCategoryList.add(Recipe(2, "Pork"))
+//        mainCategoryList.add(Recipe(3, "Dessert"))
+//
         subCategoryList.add(Recipe(0, "Beef"))
         subCategoryList.add(Recipe(1, "Meat"))
         subCategoryList.add(Recipe(2, "Pork"))
         subCategoryList.add(Recipe(3, "Dessert"))
-
-        mainCategoryAdapter.setData(mainCategoryList)
-        subCategoryAdapter.setData(subCategoryList)
+//
+//        mainCategoryAdapter.setData(mainCategoryList)
+          subCategoryAdapter.setData(subCategoryList)
     }
 
     private fun initialize() {
-        mainCategoryRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        mainCategoryRecyclerView.adapter = mainCategoryAdapter
+
+        getDataFromDatabase()
 
         mainSubCategoryRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         mainSubCategoryRecyclerView.adapter = subCategoryAdapter
 
+    }
+
+    private fun getDataFromDatabase() {
+        launch {
+            this.let {
+                var category = RecipeDatabase.getDatabase(this@HomeActivity).recipeDao().getAllCategory
+                mainCategoryList = category as ArrayList<CategoryItems>
+                mainCategoryList.reverse()
+                mainCategoryAdapter.setData(mainCategoryList)
+
+                mainCategoryRecyclerView.layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
+                mainCategoryRecyclerView.adapter = mainCategoryAdapter
+            }
+
+        }
     }
 }

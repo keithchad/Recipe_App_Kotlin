@@ -17,9 +17,9 @@
             android:layout_height="match_parent">
 
          <ImageView
-            android:id="@+id/imageDish"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
+            android:id="@+id/imageDishMain"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
              android:layout_marginEnd="-20dp"
              android:layout_marginTop="-20dp"
              android:contentDescription="@string/app_name"
@@ -27,11 +27,11 @@
             android:src="@drawable/post_1"/>
 
             <TextView
-                android:id="@+id/textDishName"
+                android:id="@+id/textDishNameMain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dish"
-                android:textSize="@dimen/_10ssp"
+                android:textSize="@dimen/_11ssp"
                 android:maxEms="10"
                 android:maxLines="2"
                 android:layout_alignParentStart="true"

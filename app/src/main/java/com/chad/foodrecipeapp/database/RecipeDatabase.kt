@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.chad.foodrecipeapp.converter.CategoryListConverter
 import com.chad.foodrecipeapp.dao.RecipeDao
+import com.chad.foodrecipeapp.model.Category
+import com.chad.foodrecipeapp.model.CategoryItems
 import com.chad.foodrecipeapp.model.Recipe
 
-@Database(entities = [ Recipe::class ], version = 1, exportSchema = false)
+@Database(entities = [ Recipe::class, Category::class, CategoryItems::class, CategoryListConverter::class ], version = 1, exportSchema = false)
 abstract class RecipeDatabase : RoomDatabase() {
 
     companion object {
@@ -16,7 +19,7 @@ abstract class RecipeDatabase : RoomDatabase() {
 
         @Synchronized
         fun getDatabase(context: Context) : RecipeDatabase {
-            if (recipeDatabase != null) {
+            if (recipeDatabase == null) {
                 recipeDatabase = Room.databaseBuilder(
                     context,
                     RecipeDatabase::class.java,
