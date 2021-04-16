@@ -1,8 +1,9 @@
-package com.chad.foodrecipeapp
+package com.chad.foodrecipeapp.activity
 
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.chad.foodrecipeapp.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

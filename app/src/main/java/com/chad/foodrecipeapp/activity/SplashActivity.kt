@@ -1,11 +1,13 @@
-package com.chad.foodrecipeapp
+package com.chad.foodrecipeapp.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.chad.foodrecipeapp.R
 import com.chad.foodrecipeapp.database.RecipeDatabase
 import com.chad.foodrecipeapp.model.Category
 import com.chad.foodrecipeapp.model.Meal
+import com.chad.foodrecipeapp.model.MealItems
 import com.chad.foodrecipeapp.retrofit.ApiInterface
 import com.chad.foodrecipeapp.retrofit.RetrofitClientInstance
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -16,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SplashActivity :BaseActivity(), EasyPermissions.RationaleCallbacks, EasyPermissions.PermissionCallbacks {
+class  SplashActivity : BaseActivity(), EasyPermissions.RationaleCallbacks, EasyPermissions.PermissionCallbacks {
 
     private var READ_STORAGE_PERMISSION = 123
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +31,7 @@ class SplashActivity :BaseActivity(), EasyPermissions.RationaleCallbacks, EasyPe
     private fun initialize() {
 
         buttonGetStarted.setOnClickListener {
-            val intent: Intent = Intent(this@SplashActivity, HomeActivity::class.java)
+            val intent = Intent(this@SplashActivity, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -62,7 +64,7 @@ class SplashActivity :BaseActivity(), EasyPermissions.RationaleCallbacks, EasyPe
         val call = service.getMealList(category)
         call.enqueue(object: Callback<Meal> {
             override fun onResponse(call: Call<Meal>, response: Response<Meal>) {
-                insertDataIntoMealDatabase(response.body())
+                insertDataIntoMealDatabase(category, response.body())
             }
 
             override fun onFailure(call: Call<Meal>, t: Throwable) {
@@ -72,13 +74,19 @@ class SplashActivity :BaseActivity(), EasyPermissions.RationaleCallbacks, EasyPe
         })
     }
 
-    private fun insertDataIntoMealDatabase(meal: Meal?) {
+    private fun insertDataIntoMealDatabase(categoryName: String, meal: Meal?) {
         launch {
             this.let {
-                RecipeDatabase.getDatabase(this@SplashActivity).recipeDao().clearDatabase()
                 for(arr in meal!!.meals) {
+                    val mealItemModel = MealItems(
+                            arr.id,
+                            arr.idMeal,
+                            categoryName,
+                            arr.strMeal,
+                            arr.strMealThumb
+                    )
                     RecipeDatabase.getDatabase(this@SplashActivity)
-                            .recipeDao().insertMeal(arr)
+                            .recipeDao().insertMeal(mealItemModel)
                 }
             }
         }
@@ -88,13 +96,23 @@ class SplashActivity :BaseActivity(), EasyPermissions.RationaleCallbacks, EasyPe
 
         launch {
             this.let {
-                RecipeDatabase.getDatabase(this@SplashActivity).recipeDao().clearDatabase()
+
                 for(arr in category!!.categoryItems) {
                     RecipeDatabase.getDatabase(this@SplashActivity)
                             .recipeDao().insertCategory(arr)
                 }
             }
         }
+    }
+
+    private fun clearDatabase() {
+
+        launch {
+            this.let {
+                RecipeDatabase.getDatabase(this@SplashActivity).recipeDao().clearDatabase()
+            }
+        }
+
     }
 
     private fun hasReadStoragePermission() : Boolean {
@@ -107,6 +125,7 @@ class SplashActivity :BaseActivity(), EasyPermissions.RationaleCallbacks, EasyPe
                     "This app needs to access your storage", READ_STORAGE_PERMISSION,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE)
         } else {
+            clearDatabase()
             getCategories()
         }
     }

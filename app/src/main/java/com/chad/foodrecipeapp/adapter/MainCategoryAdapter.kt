@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.chad.foodrecipeapp.R
+import com.chad.foodrecipeapp.`interface`.OnItemClickListener
 import com.chad.foodrecipeapp.model.CategoryItems
 import com.chad.foodrecipeapp.model.Recipe
 import kotlinx.android.synthetic.main.main_category_item.view.*
@@ -15,6 +16,7 @@ class MainCategoryAdapter : RecyclerView.Adapter<MainCategoryAdapter.ViewHolder>
 
     var context: Context? = null
     var list = ArrayList<CategoryItems>()
+    var onItemClickListener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
@@ -27,6 +29,9 @@ class MainCategoryAdapter : RecyclerView.Adapter<MainCategoryAdapter.ViewHolder>
         val categoryItems: CategoryItems = list[position]
         holder.itemView.textDishNameMain.text = categoryItems.strCategoryDescription
         Glide.with(context!!).load(categoryItems.strCategoryThumb).into(holder.itemView.imageDishMain)
+        holder.itemView.rootView.setOnClickListener {
+            onItemClickListener!!.onClicked(categoryItems.strCategory)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -35,6 +40,10 @@ class MainCategoryAdapter : RecyclerView.Adapter<MainCategoryAdapter.ViewHolder>
 
     fun setData(listCategory: ArrayList<CategoryItems>) {
         this.list = listCategory
+    }
+
+    fun setClickListener(listener: OnItemClickListener) {
+        this.onItemClickListener = listener
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -17,9 +17,7 @@
             android:id="@+id/imageDishSub"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/app_name"
-            android:scaleType="centerCrop"
-            android:src="@drawable/splash_image2"/>
+            android:contentDescription="@string/app_name" />
 
     </androidx.cardview.widget.CardView>
 

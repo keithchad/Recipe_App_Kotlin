@@ -1,7 +1,7 @@
-package com.chad.foodrecipeapp
+package com.chad.foodrecipeapp.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.chad.foodrecipeapp.R
 
 class MainActivity : BaseActivity() {
 
