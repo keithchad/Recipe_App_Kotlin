@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
-    @GET("/categories.php")
+    @GET("categories.php")
     fun getCategoryList(): Call<Category>
 
     @GET("filter.php")

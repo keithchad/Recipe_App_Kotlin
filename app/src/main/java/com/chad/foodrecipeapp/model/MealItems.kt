@@ -13,6 +13,14 @@ data class MealItems(
         @PrimaryKey(autoGenerate = true)
         var id: Int,
 
+        @ColumnInfo(name = "idMeal")
+        @Expose
+        @SerializedName("idMeal")
+        val idMeal: String,
+
+        @SerializedName("categoryName")
+        val categoryName: String,
+
         @Expose
         @SerializedName("strMeal")
         @ColumnInfo(name = "strMeal")
@@ -23,11 +31,4 @@ data class MealItems(
         @ColumnInfo(name = "strMealThumb")
         val strMealThumb: String,
 
-        @Expose
-        @SerializedName("idMeal")
-        @ColumnInfo(name = "idMeal")
-        val idMeal: String,
-
-        @SerializedName("categoryName")
-        val categoryName: String
 )

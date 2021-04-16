@@ -44,6 +44,7 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun initialize() {
+
         getDataFromDatabase()
 
         mainCategoryAdapter.setClickListener(onClicked)
